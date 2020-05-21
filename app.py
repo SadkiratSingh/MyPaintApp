@@ -9,6 +9,12 @@ from tkinter.filedialog import *
 
 root=Tk()
 root.geometry("800x600")
+root.title("Paint")
+
+icon_path=os.path.abspath('paint_icon3.png')
+icon_img=im.open(icon_path)
+icon=ImageTk.PhotoImage(icon_img)
+root.iconphoto(False,icon)
 
 class PaintApp:
     text_font=StringVar()
@@ -26,6 +32,7 @@ class PaintApp:
     x_pos,y_pos=None,None
 
     x1_line_pt,y1_line_pt,x2_line_pt,y2_line_pt=None,None,None,None
+    image=None
 
     my_image=im.new("RGB",(800,600),(255,255,255))
     draw=ImageDraw.Draw(my_image)
@@ -35,6 +42,7 @@ class PaintApp:
         root.destroy()
 
     def save_file(self,event=None):
+       
         my_file=asksaveasfile(mode='w',defaultextension='.png',filetypes=[('png files','*.png')],
                               initialdir='/',parent=root)
         if my_file is not None:
